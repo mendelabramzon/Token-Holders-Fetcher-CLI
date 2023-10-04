@@ -14,6 +14,21 @@ def get_latest_block(infura_url):
     response = requests.post(infura_url, json=payload)
     return int(response.json().get('result', '0x0'), 16)
 
+def get_logs_in_range(contract_address, infura_url, from_block, to_block):
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "eth_getLogs",
+        "params": [{
+            "fromBlock": hex(from_block),
+            "toBlock": hex(to_block),
+            "address": contract_address,
+            "topics": ["0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"]
+        }]
+    }
+    response = requests.post(infura_url, json=payload)
+    return response.json().get('result', [])
+
 def get_balance(contract_address, holder, infura_url):
     # Create the data payload for the balanceOf function
     data = '0x' + '70a08231'  # Function signature for balanceOf(address)
