@@ -33,7 +33,6 @@ ENDPOINTS = list(set([
     "https://rpc.payload.de",
     "https://llamanodes.com/",
     "https://eth.api.onfinality.io/public",
-    'https://mainnet.infura.io/v3/e907b90da383434ba83e973ad176ec59',
     'https://eth.llamarpc.com',
     'https://endpoints.omniatech.io/v1/eth/mainnet/public',
     'https://rpc.ankr.com/eth',
