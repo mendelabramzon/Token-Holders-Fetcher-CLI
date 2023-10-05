@@ -48,3 +48,67 @@ The tool will display a progress bar showing the progress of block retrieval bas
 Fetching data from the Ethereum blockchain, especially for tokens with a large number of transfers and holders, can be time-consuming. Ensure you have a stable internet connection and be patient as the tool processes the blocks.
 
 ---
+
+---
+
+# Ethereum Token Holders Fetcher (Async Version)
+
+This script asynchronously fetches Ethereum token holders and their balances using multiple Ethereum RPC endpoints.
+
+## Features
+
+- Asynchronous fetching for faster data retrieval.
+- Utilizes multiple Ethereum RPC endpoints for redundancy and higher availability.
+- Automatically retries failed requests.
+- Automatically removes problematic endpoints that consistently fail.
+- Provides a progress bar to track the processing of blocks.
+
+## Prerequisites
+
+- Python 3.7+
+- Libraries: `aiohttp`, `requests`, `tqdm`, `argparse`
+
+You can install the required libraries using:
+
+```bash
+pip install aiohttp requests tqdm argparse
+```
+
+## Usage
+
+1. Clone the repository:
+
+```bash
+git clone <repository_url>
+cd <repository_directory>
+```
+
+2. Run the script:
+
+```bash
+python script_name.py <contract_address> --start-block <start_block_number>
+```
+
+Replace `<contract_address>` with the Ethereum contract address of the token and `<start_block_number>` with the block number to start fetching from. The `--start-block` argument is optional and defaults to 1.
+
+## How It Works
+
+1. The script first determines the latest block on the Ethereum network.
+2. It then asynchronously fetches logs for ERC20 Transfer events from the specified start block to the latest block.
+3. The script extracts token holders from the logs and fetches their balances.
+4. All data is saved to a JSON file named `holders_balances.json`.
+
+## Handling Endpoint Limitations
+
+The script is designed to handle endpoint limitations:
+
+- If a request to an endpoint fails, the script will retry it a specified number of times.
+- If an endpoint consistently causes issues, it will be automatically removed from the list of endpoints.
+
+## Contributing
+
+Feel free to fork the repository, make changes, and submit pull requests. Feedback and contributions are welcome!
+
+---
+
+Note: Make sure to replace placeholders like `<repository_url>`, `<repository_directory>`, and `script_name.py` with the actual values relevant to your project.
